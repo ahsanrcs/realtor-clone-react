@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {toast} from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -16,6 +20,21 @@ export default function SignIn() {
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+  }
+  async function onSubmit(e){
+    e.preventDefault();
+    try{
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth,email,password);
+      if(userCredential){
+        navigate("/");
+      }
+      }
+      catch(error){
+        toast.error("Wrong userCredential");
+      }
+    
+
   }
   return (
     <section>
@@ -78,6 +97,7 @@ export default function SignIn() {
             </div>
             <button
             type="submit"
+            onClick={onSubmit}
             className="text-white bg-blue-600 w-full px-7 py-3 uppercase rounded shadow-md font-medium hover:bg-blue-700 hover:shadow-lg transition duration-150 ease-in-out active:bg-blue-800 "
           >
             Sign In
