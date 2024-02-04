@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Navigate, Outlet } from "react-router";
 import {useAuthStatus} from "./hooks/useAuthStatus";
 

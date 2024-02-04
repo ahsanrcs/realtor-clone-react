@@ -10,11 +10,11 @@ export function useAuthStatus() {
         onAuthStateChanged(auth,(user)=>{
             if(user){
                 setLoggedIn(true);
-                setCheckingStatus(false)
+                setCheckingStatus(false);               
             }
             else{
 
-                setCheckingStatus(true);
+                setCheckingStatus(false);
             }
 
         });

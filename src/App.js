@@ -7,7 +7,7 @@ import SignUp from './pages/SignUp.jsx';
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Header from "./components/Header.jsx";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
