@@ -1,9 +1,10 @@
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
-import { list } from "firebase/storage";
+import { IoMdTrash } from "react-icons/io";
+import { MdModeEditOutline } from "react-icons/md";
 
-export default function ListingItem({ listing, id }) {
+export default function ListingItem({ listing, id, onEdit, onDelete }) {
   return (
     <li className=" relative bg-white flex flex-col justify-between items-center shadow-md hover:shodow-xl rounded-md overflow-hidden transition-shadow duration-150 m-[10px]">
       <Link className="contents" to={`/category/${listing.type}/${id}`}>
@@ -21,9 +22,13 @@ export default function ListingItem({ listing, id }) {
         <div className="w-full p-[10px]">
           <div className="flex items-center space-x-1">
             <FaLocationDot className="h-4 w-4 text-green-600" />
-            <p className="font-semibold text-sm mb-[2px] text-gray-600 truncate">{listing.address}</p>
+            <p className="font-semibold text-sm mb-[2px] text-gray-600 truncate">
+              {listing.address}
+            </p>
           </div>
-          <p className="font-semibold mt-0 text-xl truncate">{listing.fullname}</p>
+          <p className="font-semibold mt-0 text-xl truncate">
+            {listing.fullname}
+          </p>
           <p className="text-[#457b9d] mt-2 font-semibold">
             $
             {listing.offer
@@ -51,6 +56,14 @@ export default function ListingItem({ listing, id }) {
           </div>
         </div>
       </Link>
+      {onDelete && (
+        <IoMdTrash className="absolute bottom-2 right-2 h-4 cursor-pointer text-red-500" 
+        onClick={()=>onDelete(listing.id)}/>
+      )}
+        {onEdit && (
+          <MdModeEditOutline className="absolute bottom-2 right-7 h-4 cursor-pointer text-black" 
+        onClick={()=>onEdit(listing.id)}/>
+      )}
     </li>
   );
 }
